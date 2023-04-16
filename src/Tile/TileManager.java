@@ -19,7 +19,7 @@ public class TileManager {
         tile = new Tile[10];
         mapTileNum = new int[gamePanel.maxScreenCol][gamePanel.maxScreenROw];
         getTileImage();
-        loadMap("/Mappe/mappa01.txt");
+        loadMap("/Mappe/mappa1.txt");
     }
 
     public void getTileImage(){
@@ -59,6 +59,7 @@ public class TileManager {
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
+                    System.out.println(mapTileNum[col][row]);
                     col++;
 
                 }
