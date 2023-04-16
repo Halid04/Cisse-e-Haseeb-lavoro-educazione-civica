@@ -20,8 +20,8 @@ public class Player extends Entity{
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 600;
+        x = 350;
+        y = 500;
         speed = 4;
         direction = "up";
     }
@@ -53,7 +53,7 @@ public class Player extends Entity{
                 x += speed;
             }
             spriteCounter++;
-            if(spriteCounter > 5){
+            if(spriteCounter > 10){
                 if (spriteNum == 1){
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
