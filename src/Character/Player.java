@@ -1,4 +1,4 @@
-package Entity;
+package Character;
 
 import JumperFrogPackage1.GamePanel;
 import JumperFrogPackage1.KeyHandler;
@@ -28,12 +28,12 @@ public class Player extends Entity{
 
     public void getPlayerImage(){
         try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog_up1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog_up2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog_left1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog_left2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog_right1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/frog_right2.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_up1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_up2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_left1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_left2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_right1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_right2.png"));
             System.out.println("2");
         }catch (IOException e){
             e.printStackTrace();

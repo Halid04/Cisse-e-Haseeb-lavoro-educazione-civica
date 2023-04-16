@@ -1,6 +1,7 @@
 package JumperFrogPackage1;
 
-import Entity.Player;
+import Character.Player;
+import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,17 +11,15 @@ public class GamePanel extends JPanel implements Runnable{
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 16;
-    final int maxScreenROw = 12;
-    final int screnWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenROw;
+    public final int maxScreenCol = 16;
+    public final int maxScreenROw = 12;
+    public final int screnWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenROw;
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
     int FPS = 60;
     Player player = new Player(this, keyHandler);
+    TileManager tileManager = new TileManager(this);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screnWidth,screenHeight));
@@ -67,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(graphics);
 
         Graphics2D graphics2 = (Graphics2D) graphics;
+        tileManager.draw(graphics2);
         player.draw(graphics2);
         graphics2.dispose();
     }
