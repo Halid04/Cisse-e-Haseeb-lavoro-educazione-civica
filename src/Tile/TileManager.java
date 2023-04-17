@@ -22,6 +22,7 @@ public class TileManager {
         loadMap("/Mappe/mappa1.txt");
     }
 
+    int gg;
     public void getTileImage(){
         try {
             tile[0] = new Tile();
