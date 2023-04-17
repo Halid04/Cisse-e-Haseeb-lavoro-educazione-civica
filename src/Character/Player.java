@@ -11,17 +11,22 @@ import java.io.IOException;
 public class Player extends Entity{
     GamePanel gamePanel;
     KeyHandler keyHandler;
+    public final int screenX;
+    public final int screenY;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+        screenX = gamePanel.screnWidth/2 - (gamePanel.tileSize/2); //cc
+        screenY = gamePanel.screenHeight/2 - (gamePanel.tileSize/2); //cc
+
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        x = 350;
-        y = 500;
+        worldX = gamePanel.tileSize * 23;
+        worldY = gamePanel.tileSize * 21;
         speed = 4;
         direction = "up";
     }
@@ -34,7 +39,6 @@ public class Player extends Entity{
             left2 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_left2.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_right1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/Sprites/frog_right2.png"));
-            System.out.println("2");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -44,13 +48,13 @@ public class Player extends Entity{
         if (keyHandler.upPressed || keyHandler.leftPressed || keyHandler.rightPressed){
             if(keyHandler.upPressed){
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             }else if(keyHandler.leftPressed){
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             }else if(keyHandler.rightPressed){
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
             spriteCounter++;
             if(spriteCounter > 5){
@@ -95,6 +99,6 @@ public class Player extends Entity{
                 }
                 break;
         }
-        graphics2.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 }

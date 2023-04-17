@@ -17,7 +17,7 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tile = new Tile[10];
-        mapTileNum = new int[gamePanel.maxScreenCol][gamePanel.maxScreenROw];
+        mapTileNum = new int[gamePanel.maxWorldCOl][gamePanel.maxWorldRow];
         getTileImage();
         loadMap("/Mappe/mappa1.txt");
     }
@@ -39,6 +39,9 @@ public class TileManager {
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/water.png"));
 
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/trunk.png"));
+
         }catch (IOException e){
             e.printStackTrace();
             System.out.println("Washington abbiamo un proble!");
@@ -53,16 +56,16 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col<gamePanel.maxScreenCol && row<gamePanel.maxScreenROw){
+            while (col<gamePanel.maxWorldCOl && row<gamePanel.maxWorldRow){
                 String line = bufferedReader.readLine();
 
-                while (col < gamePanel.maxScreenCol){
+                while (col < gamePanel.maxWorldCOl){
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;
                 }
-                if(col == gamePanel.maxScreenCol){
+                if(col == gamePanel.maxWorldCOl){
                     col = 0;
                     row++;
                 }
