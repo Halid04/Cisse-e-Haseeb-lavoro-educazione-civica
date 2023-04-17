@@ -4,18 +4,18 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Game tutorial");
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setTitle("Game tutorial");
 
         GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        frame.add(gamePanel);
 
-        window.pack();
+        frame.pack();
 
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
         gamePanel.startGameThread();
 

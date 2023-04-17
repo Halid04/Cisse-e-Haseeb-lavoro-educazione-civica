@@ -67,8 +67,6 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D graphics2){
-        /*graphics2.setColor(Color.WHITE);
-        graphics2.fillRect(x,y,gamePanel.tileSize,gamePanel.tileSize);*/
         BufferedImage image = null;
 
         switch (direction){
@@ -97,8 +95,6 @@ public class Player extends Entity{
                 }
                 break;
         }
-
         graphics2.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-
     }
 }

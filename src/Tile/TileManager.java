@@ -41,7 +41,7 @@ public class TileManager {
 
         }catch (IOException e){
             e.printStackTrace();
-            System.out.println("qua bon bchcbwehh");
+            System.out.println("Washington abbiamo un proble!");
         }
     }
 
@@ -60,19 +60,16 @@ public class TileManager {
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-                    System.out.println(mapTileNum[col][row]);
                     col++;
-
                 }
                 if(col == gamePanel.maxScreenCol){
                     col = 0;
                     row++;
                 }
-
             }
             bufferedReader.close();
         }catch (Exception e){
-
+            System.out.println("Washington abbiamo un proble!");
         }
     }
 

@@ -9,7 +9,6 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
     final int originalTileSize = 16;
     final int scale = 3;
-
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
     public final int maxScreenROw = 12;
@@ -43,7 +42,6 @@ public class GamePanel extends JPanel implements Runnable{
 
         while (gameThread != null){
             currentTime = System.nanoTime();
-
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
 
@@ -52,19 +50,15 @@ public class GamePanel extends JPanel implements Runnable{
                 repaint();
                 delta--;
             }
-
         }
     }
 
     public void update(){
         player.update();
-
-
     }
 
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-
         Graphics2D graphics2 = (Graphics2D) graphics;
         tileManager.draw(graphics2);
         player.draw(graphics2);
