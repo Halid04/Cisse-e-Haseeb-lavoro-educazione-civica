@@ -22,7 +22,6 @@ public class TileManager {
         loadMap("/Mappe/mappa1.txt");
     }
 
-    int gg;
     public void getTileImage(){
         try {
             tile[0] = new Tile();
@@ -42,6 +41,7 @@ public class TileManager {
 
         }catch (IOException e){
             e.printStackTrace();
+            System.out.println("qua bon bchcbwehh");
         }
     }
 
