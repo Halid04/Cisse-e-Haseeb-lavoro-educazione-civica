@@ -17,8 +17,8 @@ public class Player extends Entity{
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
-        screenX = gamePanel.screnWidth/2 - (gamePanel.tileSize/2); //cc
-        screenY = (gamePanel.screenHeight-48) - (gamePanel.tileSize/2); //cc
+        screenX = gamePanel.screnWidth/2 - (gamePanel.tileSize/2);
+        screenY = (gamePanel.screenHeight-48) - (gamePanel.tileSize/2);
 
         setDefaultValues();
         getPlayerImage();
