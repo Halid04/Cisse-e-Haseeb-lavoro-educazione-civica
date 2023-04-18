@@ -42,6 +42,12 @@ public class TileManager {
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/trunk.png"));
 
+            tile[6] = new Tile();
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/woodenBarrier.png"));
+
+            tile[7] = new Tile();
+            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/woodenBarrierDark.png"));
+
         }catch (IOException e){
             e.printStackTrace();
             System.out.println("Washington abbiamo un proble!");
