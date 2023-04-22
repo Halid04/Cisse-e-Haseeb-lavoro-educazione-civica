@@ -14,7 +14,7 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if(code == KeyEvent.VK_UP){
+        if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W){
             upPressed = true;
         }
 
@@ -32,7 +32,7 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if(code == KeyEvent.VK_UP){
+        if(code == KeyEvent.VK_UP||code == KeyEvent.VK_W){
             upPressed = false;
         }
 

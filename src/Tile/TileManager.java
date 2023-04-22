@@ -44,6 +44,7 @@ public class TileManager {
 
             tile[6] = new Tile();
             tile[6].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/woodenBarrier.png"));
+            tile[6].collision = true;
 
             tile[7] = new Tile();
             tile[7].image = ImageIO.read(getClass().getResourceAsStream("/Sprites/woodenBarrierDark.png"));

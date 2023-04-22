@@ -19,6 +19,11 @@ public class Player extends Entity{
         this.keyHandler = keyHandler;
         screenX = gamePanel.screnWidth/2 - (gamePanel.tileSize/2);
         screenY = (gamePanel.screenHeight-48) - (gamePanel.tileSize/2);
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         setDefaultValues();
         getPlayerImage();
@@ -56,6 +61,10 @@ public class Player extends Entity{
                 direction = "right";
                 worldX += speed;
             }
+
+            collisionOn = false;
+            //gamePanel.collisionDetection.CheckTile(this);
+
             spriteCounter++;
             if(spriteCounter > 5){
                 if (spriteNum == 1){
