@@ -5,6 +5,7 @@ const birdHeight = 24;
 const birdAnimationSpeed = 0.1;
 const groundHeight = 70;
 const groundWidth = cameraWidth;
+const groundAnimationSpeed = 0.1;
 
 let app = new PIXI.Application({
   width: cameraWidth,
@@ -17,44 +18,48 @@ const background = new PIXI.Sprite(
 );
 background.width = cameraWidth + 100;
 background.height = cameraHeight;
-
 app.stage.addChild(background);
 
-const spriteImages = [
+const birdSpriteImages = [
   "Image/yellowbird-midflap.png",
   "Image/yellowbird-downflap.png",
   "Image/yellowbird-upflap.png",
 ];
-const textureArray = [];
+const birdTextureArray = [];
 
 for (let i = 0; i < 3; i++) {
-  const texture = PIXI.Texture.from(spriteImages[i]);
-  textureArray.push(texture);
+  const birdTexture = PIXI.Texture.from(birdSpriteImages[i]);
+  birdTextureArray.push(birdTexture);
 }
 
-const birdAnimation = new PIXI.AnimatedSprite(textureArray);
+const birdAnimation = new PIXI.AnimatedSprite(birdTextureArray);
 birdAnimation.x = Math.floor(cameraWidth / 2 - birdWidth / 2);
 
 let elapsed = 0.0;
 app.ticker.add((delta) => {
   elapsed += delta;
-  birdAnimation.y = 50.0 + Math.cos(elapsed/15) * 5.0 + (cameraHeight/3);
+  birdAnimation.y = 50.0 + Math.cos(elapsed / 15) * 5.0 + cameraHeight / 3;
 });
 
 birdAnimation.y = Math.floor(cameraHeight / 2 - birdHeight / 2);
 birdAnimation.animationSpeed = birdAnimationSpeed * 2;
-
 app.stage.addChild(birdAnimation);
-
 birdAnimation.play();
 
+const groundSpriteImages = ["Image/base.png", "Image/base2.png.png"];
+const groundTextureArray = [];
 
-const ground = new PIXI.Sprite(
-  PIXI.Texture.from("Image/base.png")
-);
-ground.width = groundWidth;
-ground.height = groundHeight;
-ground.x = 0;
-ground.y = cameraHeight-groundHeight;
+for (let i = 0; i < 2; i++) {
+  const groundTexture = PIXI.Texture.from(groundSpriteImages[i]);
+  groundTextureArray.push(groundTexture);
+}
 
-app.stage.addChild(ground);
+const groundAnimation = new PIXI.AnimatedSprite(groundTextureArray);
+groundAnimation.width = groundWidth;
+// groundAnimation.height = groundHeight;
+groundAnimation.y = cameraHeight - 110;
+
+groundAnimation.animationSpeed = groundAnimationSpeed * 1.5;
+
+app.stage.addChild(groundAnimation);
+groundAnimation.play();
