@@ -38,7 +38,7 @@ birdAnimation.x = Math.floor(cameraWidth / 2 - birdWidth / 2);
 let elapsed = 0.0;
 app.ticker.add((delta) => {
   elapsed += delta;
-  birdAnimation.y = 50.0 + Math.cos(elapsed/15) * 5.0;
+  birdAnimation.y = 50.0 + Math.cos(elapsed/15) * 5.0 + (cameraHeight/3);
 });
 
 birdAnimation.y = Math.floor(cameraHeight / 2 - birdHeight / 2);
