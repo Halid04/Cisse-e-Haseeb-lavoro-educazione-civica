@@ -7,7 +7,8 @@ const groundHeight = 100;
 const groundWidth = cameraWidth;
 const groundAnimationSpeed = 0.1;
 let gravity = 9.8;
-let start = false;
+let isStart = false;
+let collisione = false;
 
 let app = new PIXI.Application({
   width: cameraWidth,
@@ -15,84 +16,123 @@ let app = new PIXI.Application({
 });
 document.body.appendChild(app.view);
 
-const background = new PIXI.Sprite(
-  PIXI.Texture.from("Image/background-day.png")
-);
-background.width = cameraWidth + 100;
-background.height = cameraHeight;
-app.stage.addChild(background);
+let background;
+const setBackground = () => {
+  background = new PIXI.Sprite(PIXI.Texture.from("Image/background-day.png"));
+  background.width = cameraWidth + 100;
+  background.height = cameraHeight;
+  app.stage.addChild(background);
+};
 
-const birdSpriteImages = [
-  "Image/yellowbird-midflap.png",
-  "Image/yellowbird-downflap.png",
-  "Image/yellowbird-upflap.png",
-];
-const birdTextureArray = [];
+let birdSpriteImages;
+let birdTextureArray;
+let birdTexture;
+let birdAnimation;
+const setBird = () => {
+  birdSpriteImages = [
+    "Image/yellowbird-midflap.png",
+    "Image/yellowbird-downflap.png",
+    "Image/yellowbird-upflap.png",
+  ];
+  birdTextureArray = [];
 
-for (let i = 0; i < 3; i++) {
-  const birdTexture = PIXI.Texture.from(birdSpriteImages[i]);
-  birdTextureArray.push(birdTexture);
-}
-
-const birdAnimation = new PIXI.AnimatedSprite(birdTextureArray);
-birdAnimation.anchor.y = 0.5;
-birdAnimation.anchor.x = 0.5;
-birdAnimation.x = Math.floor(cameraWidth / 2);
-// birdAnimation.y = Math.floor(cameraHeight / 2);
-
-if (!start) {
-  let elapsed = 0.0;
-  app.ticker.add((delta) => {
-    elapsed += delta;
-    birdAnimation.y = 50.0 + Math.cos(elapsed / 15) * 5.0 + cameraHeight / 2.8;
-  });
-}
-
-birdAnimation.animationSpeed = birdAnimationSpeed * 2;
-app.stage.addChild(birdAnimation);
-birdAnimation.play();
-
-const groundSpriteImages = [
-  "Image/base.png",
-  "Image/base2.png.png",
-  "Image/base1_5.png ",
-];
-const groundTextureArray = [];
-
-for (let i = 0; i < 2; i++) {
-  const groundTexture = PIXI.Texture.from(groundSpriteImages[i]);
-  groundTextureArray.push(groundTexture);
-}
-
-const groundAnimation = new PIXI.AnimatedSprite(groundTextureArray);
-groundAnimation.width = groundWidth;
-groundAnimation.anchor.y = 0.5;
-groundAnimation.anchor.x = 0.5;
-groundAnimation.y = cameraHeight - groundHeight / 2;
-groundAnimation.x = groundWidth / 2;
-
-groundAnimation.animationSpeed = groundAnimationSpeed * 1.5;
-
-app.stage.addChild(groundAnimation);
-groundAnimation.play();
-
-window.addEventListener("keydown", (e) => {
-  if (e.key == " ") {
-    start = true;
-    ok = true;
+  for (let i = 0; i < 3; i++) {
+    birdTexture = PIXI.Texture.from(birdSpriteImages[i]);
+    birdTextureArray.push(birdTexture);
   }
 
-  if (start == true) {
-    let velocitaPre = birdAnimation.y;
+  birdAnimation = new PIXI.AnimatedSprite(birdTextureArray);
+  birdAnimation.anchor.y = 0.5;
+  birdAnimation.anchor.x = 0.5;
+  birdAnimation.x = Math.floor(cameraWidth / 2);
 
+  if (!isStart) {
+    let elapsed = 0.0;
     app.ticker.add((delta) => {
-      velocitaPre += delta * (gravity / 2);
-      birdAnimation.y = velocitaPre;
-      birdAnimation.rotation += 0.04;
+      elapsed += delta;
+      birdAnimation.y =
+        50.0 + Math.cos(elapsed / 15) * 5.0 + cameraHeight / 2.8;
     });
   }
-});
 
-function birdGroundCollision(sprite1, sprite2) {}
+  birdAnimation.animationSpeed = birdAnimationSpeed * 2;
+  app.stage.addChild(birdAnimation);
+  birdAnimation.play();
+};
 
-// birdAnimation.y = Math.floor(cameraHeight / 2 - birdHeight / 2);
+let groundSpriteImages;
+let groundTextureArray;
+let groundTexture;
+let groundAnimation;
+const setGround = () => {
+  groundSpriteImages = [
+    "Image/base.png",
+    "Image/base2.png.png",
+    "Image/base1_5.png ",
+  ];
+  groundTextureArray = [];
+
+  for (let i = 0; i < 2; i++) {
+    groundTexture = PIXI.Texture.from(groundSpriteImages[i]);
+    groundTextureArray.push(groundTexture);
+  }
+
+  groundAnimation = new PIXI.AnimatedSprite(groundTextureArray);
+  groundAnimation.width = groundWidth;
+  groundAnimation.anchor.y = 0.5;
+  groundAnimation.anchor.x = 0.5;
+  groundAnimation.y = cameraHeight - groundHeight / 2;
+  groundAnimation.x = groundWidth / 2;
+  groundAnimation.animationSpeed = groundAnimationSpeed * 1.5;
+
+  app.stage.addChild(groundAnimation);
+  groundAnimation.play();
+};
+
+const keyHandler = () => {
+  window.addEventListener("keydown", (e) => {
+    if (e.key == " ") {
+      isStart = true;
+
+      let velocitaPre = birdAnimation.y;
+      const tickerHandler = (delta) => {
+        if (!collisione) {
+          velocitaPre += (delta * gravity) / 2;
+          birdAnimation.y = velocitaPre;
+          birdAnimation.rotation += 0.04;
+
+          if (birdGroundCollision(birdAnimation, groundAnimation)) {
+            // birdAnimation.stop();
+            // groundAnimation.stop();
+            collisione = true;
+            isStart = false;
+            app.ticker.stop();
+          }
+        }
+      };
+
+      app.ticker.add(tickerHandler);
+    }
+  });
+};
+
+function birdGroundCollision(sprite1, sprite2) {
+  let sprite1Box = sprite1.getBounds();
+  let sprite2Box = sprite2.getBounds();
+
+  return (
+    sprite1Box.x + sprite1Box.width - 3 > sprite2Box.x &&
+    sprite2Box.x + sprite2Box.width > sprite1Box.x &&
+    sprite1Box.y + sprite1Box.height - 3 > sprite2Box.y &&
+    sprite2Box.y + sprite2Box.height > sprite1Box.y
+  );
+}
+
+function setup() {
+  setBackground();
+  setBird();
+  setGround();
+  keyHandler();
+}
+
+setup();
