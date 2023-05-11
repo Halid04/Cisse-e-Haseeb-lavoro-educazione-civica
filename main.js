@@ -9,6 +9,7 @@ const groundAnimationSpeed = 0.1;
 let gravity = 9.8;
 let isStart = false;
 let collisione = false;
+let jumping = false;
 
 let app = new PIXI.Application({
   width: cameraWidth,
@@ -93,27 +94,42 @@ const keyHandler = () => {
   window.addEventListener("keydown", (e) => {
     if (e.key == " ") {
       isStart = true;
-
-      let velocitaPre = birdAnimation.y;
-      const tickerHandler = (delta) => {
-        if (!collisione) {
-          velocitaPre += (delta * gravity) / 2;
-          birdAnimation.y = velocitaPre;
-          birdAnimation.rotation += 0.04;
-
-          if (birdGroundCollision(birdAnimation, groundAnimation)) {
-            // birdAnimation.stop();
-            // groundAnimation.stop();
-            collisione = true;
-            isStart = false;
-            app.ticker.stop();
-          }
-        }
-      };
-
-      app.ticker.add(tickerHandler);
+      gravityHandler();
+    } else if (isStart && e.key == "a") {
+      // birdAnimation.y += 4;
     }
   });
+};
+
+const gravityHandler = () => {
+  var Engine = Matter.Engine,
+    Render = Matter.Render,
+    Runner = Matter.Runner,
+    Bodies = Matter.Bodies,
+    Composite = Matter.Composite;
+
+  var engine = Engine.create();
+
+  var render = Render.create({
+    element: document.body,
+    engine: engine,
+  });
+
+  Composite.add(engine.world, birdAnimation);
+
+  var runner = Runner.create();
+
+  Runner.run(runner, engine);
+
+  if (isStart) {
+    let falling = birdAnimation.y;
+    if (!collisione) {
+      if (birdGroundCollision(birdAnimation, groundAnimation)) {
+        collisione = true;
+        isStart = false;
+      }
+    }
+  }
 };
 
 function birdGroundCollision(sprite1, sprite2) {
@@ -128,11 +144,14 @@ function birdGroundCollision(sprite1, sprite2) {
   );
 }
 
+let ticker = new PIXI.Ticker();
 function setup() {
   setBackground();
   setBird();
   setGround();
   keyHandler();
+  gravityHandler();
 }
 
+ticker.start();
 setup();
