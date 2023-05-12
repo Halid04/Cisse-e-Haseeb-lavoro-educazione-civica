@@ -1,0 +1,28 @@
+{
+  "FolderOrderSettings": [
+    {"name":"Sprites","order":1,"path":"folders/Sprites.yy",},
+    {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
+    {"name":"Sounds","order":3,"path":"folders/Sounds.yy",},
+    {"name":"Paths","order":4,"path":"folders/Paths.yy",},
+    {"name":"Scripts","order":5,"path":"folders/Scripts.yy",},
+    {"name":"Shaders","order":6,"path":"folders/Shaders.yy",},
+    {"name":"Fonts","order":7,"path":"folders/Fonts.yy",},
+    {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
+    {"name":"Objects","order":9,"path":"folders/Objects.yy",},
+    {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
+    {"name":"Sequences","order":11,"path":"folders/Sequences.yy",},
+    {"name":"Animation Curves","order":12,"path":"folders/Animation Curves.yy",},
+    {"name":"Notes","order":13,"path":"folders/Notes.yy",},
+    {"name":"Extensions","order":14,"path":"folders/Extensions.yy",},
+    {"name":"Particle Systems","order":15,"path":"folders/Particle Systems.yy",},
+  ],
+  "ResourceOrderSettings": [
+    {"name":"tsBlueBackground","order":5,"path":"tilesets/tsBlueBackground/tsBlueBackground.yy",},
+    {"name":"BlueBackground","order":4,"path":"sprites/BlueBackground/BlueBackground.yy",},
+    {"name":"tsTerrain","order":3,"path":"tilesets/tsTerrain/tsTerrain.yy",},
+    {"name":"StandUpAnimationObj1","order":1,"path":"objects/StandUpAnimationObj1/StandUpAnimationObj1.yy",},
+    {"name":"RunAnimation","order":1,"path":"sprites/RunAnimation/RunAnimation.yy",},
+    {"name":"PinkBackground","order":1,"path":"sprites/PinkBackground/PinkBackground.yy",},
+    {"name":"tsPinkBackground","order":2,"path":"tilesets/tsPinkBackground/tsPinkBackground.yy",},
+  ],
+}
