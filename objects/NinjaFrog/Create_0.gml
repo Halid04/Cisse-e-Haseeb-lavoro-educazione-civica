@@ -1,3 +1,10 @@
 image_speed = 1;
-left = false;
-right = true;
+xSpeed = 0;
+ySpeed = 0;
+
+moveSpeed = 2;
+jumpSpeed = -4;
+gravita = 0.25;
+
+rightPos = true;
+leftPos = false;

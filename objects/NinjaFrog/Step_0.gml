@@ -1,32 +1,62 @@
-if(right){
+x = clamp(x, (sprite_width/2), (room_width-(sprite_width/2)));
+y = clamp(y, sprite_height, (room_height));
+
+destra = keyboard_check(vk_right);
+sinistra = keyboard_check(vk_left);
+salto = keyboard_check_pressed(vk_up);
+
+xSpeed = (destra - sinistra) * moveSpeed;
+ySpeed += gravita;
+
+if salto && place_meeting(x, y+1, CollisionBoxObj){
+	ySpeed = jumpSpeed;
+	sprite_index = JumpRight;
+}
+
+if place_meeting(x+xSpeed, y, CollisionBoxObj){
+	
+	//opzionale
+	var _pixelCheck = sign(xSpeed);
+	while !place_meeting(x+ _pixelCheck, y, CollisionBoxObj){
+		x += _pixelCheck
+	}
+	
+	xSpeed = 0;
+}
+
+if place_meeting(x+xSpeed, y+ySpeed, CollisionBoxObj){
+	
+	//opzionale
+	var _pixelCheck = sign(ySpeed);
+	while !place_meeting(x+ xSpeed, y+_pixelCheck, CollisionBoxObj){
+		y += _pixelCheck
+	}
+	
+	ySpeed = 0;
+}
+
+
+if(rightPos){
 	sprite_index = StandUpAnimationRight;
-}else if(left){
+}else if(leftPos){
 	sprite_index = StandUpAnimationLeft;
 }
 
 
 if keyboard_check(vk_left)
 {
-    x -= 2;
-	sprite_index = RunAnimationLeft
-	left = true;
-	right = false;
+	sprite_index = RunAnimationLeft;
+	leftPos = true;
+	rightPos = false;
 }
 
 if keyboard_check(vk_right)
 {
-    x += 2;
 	sprite_index = RunAnimationRight;
-	left = false;
-	right = true;
+	leftPos = false;
+	rightPos = true;
 }
 
-if keyboard_check(vk_up)
-{
-    y -= 2;
-}
 
-if keyboard_check(vk_down)
-{
-    y += 2;
-}
+x += xSpeed;
+y += ySpeed;
