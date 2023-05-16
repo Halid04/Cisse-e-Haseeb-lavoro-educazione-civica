@@ -8,10 +8,23 @@ salto = keyboard_check_pressed(vk_up);
 xSpeed = (destra - sinistra) * moveSpeed;
 ySpeed += gravita;
 
-if salto && place_meeting(x, y+1, CollisionBoxObj){
+if salto && place_meeting(x, y+ySpeed, CollisionBoxObj){
 	ySpeed = jumpSpeed;
-	sprite_index = JumpRight;
+	
 }
+
+/*if ( !place_meeting(x, y+ySpeed, CollisionBoxObj) &&
+	 !keyboard_check(vk_right) &&
+	 !keyboard_check(vk_left) &&
+	 !keyboard_check(vk_down) &&
+	 !keyboard_check(vk_up) ) {
+	sprite_index= FallLeft;
+}*/
+
+/*if (ySpeed >0 && !place_meeting(x+xSpeed, y+ySpeed, CollisionBoxObj)) {
+    sprite_index = FallLeft;
+}*/
+
 
 if place_meeting(x+xSpeed, y, CollisionBoxObj){
 	

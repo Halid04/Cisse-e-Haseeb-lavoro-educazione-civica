@@ -8,3 +8,5 @@ gravita = 0.25;
 
 rightPos = true;
 leftPos = false;
+
+global.itemMancanti = 3;

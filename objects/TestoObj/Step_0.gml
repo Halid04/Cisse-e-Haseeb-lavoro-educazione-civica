@@ -1,0 +1,1 @@
+testo = "Item mancanti: " + string(global.itemMancanti);
