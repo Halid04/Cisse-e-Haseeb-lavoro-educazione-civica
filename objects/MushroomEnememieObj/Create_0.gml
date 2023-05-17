@@ -1,0 +1,9 @@
+xIniziale = 192;
+yIniziale = 272;
+xFinale = 384;
+yFinale = yIniziale;
+durata = 200;
+timer = 0;
+posizione = 0;
+direzione = true;
+global.mushroomCollision = false;

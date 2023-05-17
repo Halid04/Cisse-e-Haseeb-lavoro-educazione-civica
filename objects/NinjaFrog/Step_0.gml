@@ -8,23 +8,11 @@ salto = keyboard_check_pressed(vk_up);
 xSpeed = (destra - sinistra) * moveSpeed;
 ySpeed += gravita;
 
+//terreno 
 if salto && place_meeting(x, y+ySpeed, CollisionBoxObj){
 	ySpeed = jumpSpeed;
 	
 }
-
-/*if ( !place_meeting(x, y+ySpeed, CollisionBoxObj) &&
-	 !keyboard_check(vk_right) &&
-	 !keyboard_check(vk_left) &&
-	 !keyboard_check(vk_down) &&
-	 !keyboard_check(vk_up) ) {
-	sprite_index= FallLeft;
-}*/
-
-/*if (ySpeed >0 && !place_meeting(x+xSpeed, y+ySpeed, CollisionBoxObj)) {
-    sprite_index = FallLeft;
-}*/
-
 
 if place_meeting(x+xSpeed, y, CollisionBoxObj){
 	
@@ -68,6 +56,12 @@ if keyboard_check(vk_right)
 	sprite_index = RunAnimationRight;
 	leftPos = false;
 	rightPos = true;
+}
+
+if global.mushroomCollision{
+	xSpeed = 0;
+	ySpeed = 0;
+	image_speed = 0;
 }
 
 

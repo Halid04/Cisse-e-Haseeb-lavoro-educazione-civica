@@ -1,5 +1,5 @@
-//global.timer = 2 * 60 * room_speed;
-global.timer = 1000;
+global.timer = 60 * room_speed;
+//global.timer = 10000;
 testoTimer = "";
 minutes = 0;
 seconds = 0;
